@@ -4,6 +4,7 @@ from loguru import logger
 
 from core import setup_logging
 from db import db_helper
+from api import tasks_v1_router
 from contextlib import asynccontextmanager
 
 
@@ -18,6 +19,12 @@ async def lifespan(fs: FastAPI):
 app = FastAPI(lifespan=lifespan)
 setup_logging()
 
+app.include_router(tasks_v1_router)
+
+
+def main():
+    uvicorn.run("main:app", access_log=True)
+
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", access_log=True)
+    main()

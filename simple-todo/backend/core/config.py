@@ -35,6 +35,15 @@ class DatabaseConfig(BaseModel):
         "pk": "pk_%(table_name)s",
     }
 
+class ApiV1Prefix(BaseModel):
+    prefix: str = "/v1"
+    tasks: str = "/tasks"
+
+
+class ApiPrefix(BaseModel):
+    prefix: str = "/api"
+    v1: ApiV1Prefix = ApiV1Prefix()
+
 
 class AppConfig(BaseSettings):
     model_config = SettingsConfigDict(
@@ -50,6 +59,7 @@ class AppConfig(BaseSettings):
     )
 
     logging: LoggingConfig = LoggingConfig()
+    api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
 
 
