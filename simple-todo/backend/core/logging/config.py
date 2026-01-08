@@ -6,7 +6,7 @@ settings = get_settings()
 
 dev_format = (
     "<green>{time:YYYY-MM-DDTHH:mm:ssZZ}</green> | "
-    "<level>{level:^8}</level> | "
+    "<level>{level:<7}</level> | "
     "<cyan>{name:30}</cyan>:<cyan>{function:20}</cyan> | "
     "<level>{message}</level>"
 )
@@ -26,6 +26,7 @@ LOGGING_CONFIG = {
             "serialize": True,
             "rotation": settings.logging.rotation,
             "retention": settings.logging.retention,
+            "enqueue": True,
         },
     ]
 }

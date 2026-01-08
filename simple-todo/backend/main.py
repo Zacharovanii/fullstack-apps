@@ -5,18 +5,13 @@ from loguru import logger
 from core import setup_logging
 
 app = FastAPI()
-
-
-@app.get("/")
-def hello():
-    return {"data": "hello world!"}
+setup_logging()
 
 
 def main():
-    setup_logging()
-    logger.info("App start")
-    logger.warning("TESTING")
-    uvicorn.run("main:app")
+    logger.success("BACKEND STARTING UP")
+    logger.warning("TEST")
+    uvicorn.run("main:app", access_log=True)
 
 
 if __name__ == "__main__":
