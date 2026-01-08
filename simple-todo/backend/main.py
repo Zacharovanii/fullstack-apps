@@ -4,6 +4,7 @@ from loguru import logger
 
 from core import setup_logging
 from db import db_helper
+from db.base import Base
 from api import tasks_v1_router
 from contextlib import asynccontextmanager
 
@@ -11,6 +12,10 @@ from contextlib import asynccontextmanager
 @asynccontextmanager
 async def lifespan(fs: FastAPI):
     logger.success("BACKEND STARTING UP")
+
+    async with db_helper.engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
     yield
     await db_helper.dispose()
     logger.info("BACKEND SHUTDOWN")
