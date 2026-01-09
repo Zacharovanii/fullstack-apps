@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class TaskCreate(BaseModel):
@@ -8,3 +8,5 @@ class TaskCreate(BaseModel):
 class TaskRead(TaskCreate):
     id: int
     is_complete: bool
+
+    model_config = ConfigDict(from_attributes=True)
