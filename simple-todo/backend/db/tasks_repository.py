@@ -2,7 +2,7 @@ from typing import List, Optional
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .orms import TasksORM
+from .models.tasks import TasksORM
 
 
 class TasksRepository:
