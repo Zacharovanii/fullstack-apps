@@ -17,6 +17,11 @@ async def lifespan(fs: FastAPI):
         await conn.run_sync(Base.metadata.create_all)
 
     yield
+
+    logger.warning("FOR DEBUG: DROPPING ALL TABLES")
+    async with db_helper.engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+
     await db_helper.dispose()
     logger.info("BACKEND SHUTDOWN")
 

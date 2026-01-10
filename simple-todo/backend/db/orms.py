@@ -33,10 +33,10 @@ class TaskTagORM(Base):
     __tablename__ = "task_tag"
 
     task_fk: Mapped[int] = mapped_column(
-        ForeignKey("tasks.task_id"), primary_key=True, ondelete="CASCADE"
+        ForeignKey("tasks.task_id", ondelete="CASCADE"), primary_key=True
     )
     tag_fk: Mapped[int] = mapped_column(
-        ForeignKey("tags.tag_id"), primary_key=True, ondelete="CASCADE"
+        ForeignKey("tags.tag_id", ondelete="CASCADE"), primary_key=True
     )
 
 
